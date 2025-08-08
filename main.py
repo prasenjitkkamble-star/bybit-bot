@@ -1,34 +1,23 @@
-from flask import Flask, request, jsonify
-import os
-from threading import Thread
-from bybit_martingale_bot import run_martingale_bot
+from flask import Flask
+import threading
+import time
+import bybit_martingale_bot  # Import your bot logic
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "No data received"}), 400
-    
-    print(f"📩 Webhook data received: {data}")
-    try:
-        run_martingale_bot(signal=data.get("signal", "").lower())
-        return jsonify({"status": "trade executed"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
-    return "🚀 Bybit Martingale Bot is running"
+    return "🚀 Bybit Martingale Bot is Running on Fly.io"
 
-def background_loop():
-    import time
+def run_bot():
+    """This function runs your bot in a loop forever."""
     while True:
-        run_martingale_bot(signal="auto")
-        time.sleep(60)
+        try:
+            bybit_martingale_bot.start_bot()  # Replace with your bot's main function
+        except Exception as e:
+            print(f"Bot error: {e}")
+        time.sleep(1)  # Avoid CPU overuse
 
-if __name__ == '__main__':
-    Thread(target=background_loop).start()
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == "__main__":
+    threading.Thread(target=run_bot, daemon=True).start()
+    app.run(host="0.0.0.0", port=8080)

@@ -1,3 +1,1 @@
-# Bybit Martingale Trading Bot
-
-Runs a Martingale trading strategy on Bybit using Flask + webhook.
+# Bybit Martingale Bot Ready for Fly.io
