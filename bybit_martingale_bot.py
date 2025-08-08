@@ -12,6 +12,3 @@ def run_martingale_bot(signal=None):
     print(f"🚀 Starting Martingale bot with signal: {signal}")
     # Example: Here you would place your real Bybit API trading logic
     # using BYBIT_API_KEY and BYBIT_API_SECRET for authentication.
-    # For now, this is just a placeholder print statement.
-    # Replace with actual trade execution logic.
-    # e.g., bybit_api.place_order(...)
