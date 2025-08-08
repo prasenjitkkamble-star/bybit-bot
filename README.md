@@ -53,3 +53,21 @@ The bot will:
 - Keep running your Martingale strategy in the background
 - Accept webhook trades from TradingView
 - Stay awake with free uptime pings
+
+
+
+## 🔑 Setting API Keys in Replit
+
+To keep your Bybit API keys safe, **never hardcode them** into your bot.  
+Instead, store them in Replit's built-in **Secrets** system:
+
+1. Open your Replit project.
+2. On the left sidebar, click **Tools → Secrets (Environment Variables)**.
+3. Add the following keys:
+   ```
+   BYBIT_API_KEY = your_api_key_here
+   BYBIT_API_SECRET = your_api_secret_here
+   ```
+4. Your bot will now automatically load these keys securely at runtime.
+
+**Note:** The updated `bybit_martingale_bot.py` already uses these environment variables, so you don't need to modify your code.
